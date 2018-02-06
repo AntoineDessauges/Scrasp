@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Scrasp.Models;
 
 namespace Scrasp.Controllers
 {
@@ -13,6 +14,25 @@ namespace Scrasp.Controllers
             List<string> todo = getTodoList(); 
             ViewBag.Todo = todo;
 
+            List<User> users = new List<User>{
+                new User("antoine", "1234", "user"),
+                new User("struan", "1234", "user")
+            };
+            ViewBag.Users = users;
+
+            List<Task> tasks = new List<Task>{
+                new Task("task1", Task.States.pending, users[0], DateTime.Now, 3),
+                new Task("task2", Task.States.pending, users[1], DateTime.Now, 4),
+                new Task("task3", Task.States.pending, users[1], DateTime.Now, 55)
+            };
+            ViewBag.Tasks = tasks;
+
+            List<Story> stories = new List<Story>{
+                new Story("story1", "ref1", "antoine", Story.Types.normal , Story.States.pending, 5, tasks),
+                new Story("story2", "ref2", "antoine", Story.Types.normal , Story.States.pending, 5, tasks),
+            };
+            ViewBag.Stories = stories;
+        
             return View();
         }
 

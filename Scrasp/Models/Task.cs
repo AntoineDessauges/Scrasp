@@ -7,7 +7,7 @@ namespace Scrasp.Models
 {
     public class Task : IdentifiableEntity
     {
-        private string description;
+        public string Description { get; private set; }
         public enum States { finished, pending, on_hold }
         private States state;
         private User owner;
@@ -16,7 +16,7 @@ namespace Scrasp.Models
 
         public Task(string description, States state, User owner, DateTime plannedStart, int plannedDuration)
         {
-            this.description = description;
+            Description = description;
             this.state = state;
             this.owner = owner;
             this.plannedStart = plannedStart;

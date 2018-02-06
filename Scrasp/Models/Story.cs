@@ -7,7 +7,7 @@ namespace Scrasp.Models
 {
     public class Story : IdentifiableEntity
     {
-        private string description;
+        public string Description { get; private set; }
         private string refName;
         private string actor;
         public enum Types { epic, normal }
@@ -19,7 +19,7 @@ namespace Scrasp.Models
 
         public Story(string description, string refName, string actor, Types type, States state, int points, List<Task> tasks)
         {
-            this.description = description;
+            Description = description;
             this.refName = refName;
             this.actor = actor;
             this.type = type;
@@ -27,5 +27,7 @@ namespace Scrasp.Models
             this.points = points;
             this.tasks = tasks;
         }
+
+
     }
 }

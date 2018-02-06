@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Scrasp.Models;
+
+@{
     ViewBag.Title = "Accueil";
     List<string> todolist = ViewBag.Todo;
 }
@@ -19,8 +21,20 @@
 <div class="container">
     <h3>Données</h3>
     <h4>Stories</h4>
+    @foreach (Story story in ViewBag.Stories)
+    {
+        <li>@story.Description</li>
+    }
     <h4>Tâches</h4>
+    @foreach (Task task in ViewBag.tasks)
+    {
+        <li>@task.Description</li>
+    }
     <h4>Personnes</h4>
+    @foreach (User user in ViewBag.Users)
+    {
+        <li>@user.UserName</li>
+    }
 </div>
 <div class="container">
     <h3>Actions</h3>
