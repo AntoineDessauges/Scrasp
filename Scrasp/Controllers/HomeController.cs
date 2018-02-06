@@ -9,30 +9,18 @@ namespace Scrasp.Controllers
 {
     public class HomeController : Controller
     {
+
+        List<User> users = new List<User>();
+        List<Task> tasks = new List<Task>();
+        List<Story> stories = new List<Story>();
+
         public ActionResult Index()
         {
             List<string> todo = getTodoList(); 
             ViewBag.Todo = todo;
 
-            List<User> users = new List<User>{
-                new User("antoine", "1234", "user"),
-                new User("struan", "1234", "user")
-            };
-            ViewBag.Users = users;
-
-            List<Task> tasks = new List<Task>{
-                new Task("task1", Task.States.pending, users[0], DateTime.Now, 3),
-                new Task("task2", Task.States.pending, users[1], DateTime.Now, 4),
-                new Task("task3", Task.States.pending, users[1], DateTime.Now, 55)
-            };
-            ViewBag.Tasks = tasks;
-
-            List<Story> stories = new List<Story>{
-                new Story("story1", "ref1", "antoine", Story.Types.normal , Story.States.pending, 5, tasks),
-                new Story("story2", "ref2", "antoine", Story.Types.normal , Story.States.pending, 5, tasks),
-            };
-            ViewBag.Stories = stories;
-        
+            initData();
+            
             return View();
         }
 
@@ -49,7 +37,10 @@ namespace Scrasp.Controllers
             ViewBag.Todo = todo;
 
             // Ajoutez-y un utilisateur supplémentaire
-            // ...
+            initData();
+            users.Add(new User("doran", "1234", "user"));
+            ViewBag.Users = users;
+
             ViewBag.Message = "Utilisateur ajouté";
             return View("Index");
         }
@@ -79,6 +70,24 @@ namespace Scrasp.Controllers
                     "Modifier IdentifiableEntity de telle sorte qu'elle lève une exception si l'application tente de changer l'id d'un objet à une valeur inférieure ou égale à lastId. Choisissez la bonne exception en vous appuyant sur https://docs.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions",
                     "Soumettre vos questions au moyen d'issues dans le repo Git"
                 });
+        }
+
+        private void initData(){
+
+          
+            users.Add(new User("antoine", "1234", "user"));
+            users.Add(new User("struan", "1234", "user"));
+            ViewBag.Users = users;
+
+            tasks.Add(new Task("task1", Task.States.pending, users[0], DateTime.Now, 3));
+            tasks.Add(new Task("task2", Task.States.pending, users[1], DateTime.Now, 4));
+            tasks.Add(new Task("task3", Task.States.pending, users[1], DateTime.Now, 55));
+            ViewBag.Tasks = tasks;
+
+            stories.Add(new Story("story1", "ref1", "antoine", Story.Types.normal, Story.States.pending, 5, tasks));
+            stories.Add(new Story("story2", "ref2", "antoine", Story.Types.normal, Story.States.pending, 5, tasks));
+            ViewBag.Stories = stories;
+
         }
 
     }
