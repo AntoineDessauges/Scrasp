@@ -53,6 +53,34 @@ namespace Scrasp.Controllers
             return View("Index");
         }
 
+        public ActionResult Delete(int id)
+        {
+            // Supprime un utilisateur
+            User user = users.Find(x => x.Id == id);
+            if (user == null){
+                ViewBag.Message = string.Format("Utilisateur inconnu");
+            }
+            else{
+                ViewBag.Message = string.Format("Utilisateur {0} supprimé", id);
+                users.Remove(user);
+            }
+            return View("Index");
+        }
+
+        public ActionResult ChangeId(int id, int newId)
+        {
+            // Change l'id d'un utilisateur
+            User user = users.Find(x => x.Id == id);
+            if (user == null){
+                ViewBag.Message = string.Format("Utilisateur inconnu");
+            }
+            else{
+                ViewBag.Message = string.Format("Utilisateur {0} supprimé", id);
+                user.Id = newId;
+            }
+            return View("Index");
+        }
+
         private List<string> getTodoList()
         {
             return 
