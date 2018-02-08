@@ -12,6 +12,9 @@ namespace Scrasp.Models
         public int Id {
             get => _id;
             set{
+                if(value <= lastID){
+                    throw new Exception($"L'id {value} est inférieur ou égale à {lastID}");
+                }
                 _id = value;
                 lastID = _id;
             }

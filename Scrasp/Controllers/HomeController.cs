@@ -75,8 +75,13 @@ namespace Scrasp.Controllers
                 ViewBag.Message = string.Format("Utilisateur inconnu");
             }
             else{
-                ViewBag.Message = string.Format("Utilisateur {0} supprimé", id);
-                user.Id = newId;
+                try{
+                    ViewBag.Message = string.Format("Utilisateur {0} $ maintenat l'id {1}", id, newId);
+                    user.Id = newId;
+                }
+                catch(Exception e){
+                    ViewBag.Message = e.Message;
+                }
             }
             return View("Index");
         }
