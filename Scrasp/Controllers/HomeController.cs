@@ -14,13 +14,13 @@ namespace Scrasp.Controllers
         List<Task> tasks = new List<Task>();
         List<Story> stories = new List<Story>();
 
-        public ActionResult Index()
+        public HomeController()
         {
-            List<string> todo = getTodoList(); 
-            ViewBag.Todo = todo;
-
             initData();
-            
+        }
+
+        public ActionResult Index()
+        {           
             return View();
         }
 
@@ -32,14 +32,8 @@ namespace Scrasp.Controllers
 
         public ActionResult Add()
         {
-            // Préparez vos données comme dans la méthode Index
-            List<string> todo = getTodoList();
-            ViewBag.Todo = todo;
-
             // Ajoutez-y un utilisateur supplémentaire
-            initData();
             users.Add(new User("doran", "1234", "user"));
-            ViewBag.Users = users;
 
             ViewBag.Message = "Utilisateur ajouté";
             return View("Index");
@@ -47,13 +41,15 @@ namespace Scrasp.Controllers
 
         public ActionResult Rename(int id)
         {
-            // Préparez vos données comme dans la méthode Index
-            List<string> todo = getTodoList();
-            ViewBag.Todo = todo;
-
-            // Ajoutez-y un utilisateur supplémentaire
-            // ...
-            ViewBag.Message = string.Format("Utilisateur {0} renommé",id);
+            // Renomme un utilisateur
+            User user = users.Find(x => x.Id == id);
+            if (user == null){
+                ViewBag.Message = string.Format("Utilisateur inconnu");
+            }
+            else{
+                ViewBag.Message = string.Format("Utilisateur {0} renommé", id);
+                user.UserName = "Toto";
+            }
             return View("Index");
         }
 
@@ -74,19 +70,23 @@ namespace Scrasp.Controllers
 
         private void initData(){
 
-          
+            // Préparez vos données comme dans la méthode Index
+            List<string> todo = getTodoList();
+            ViewBag.Todo = todo;
+
+            ViewBag.Users = users;
+            ViewBag.Tasks = tasks;
+            ViewBag.Stories = stories;
+
             users.Add(new User("antoine", "1234", "user"));
             users.Add(new User("struan", "1234", "user"));
-            ViewBag.Users = users;
 
             tasks.Add(new Task("task1", Task.States.pending, users[0], DateTime.Now, 3));
             tasks.Add(new Task("task2", Task.States.pending, users[1], DateTime.Now, 4));
             tasks.Add(new Task("task3", Task.States.pending, users[1], DateTime.Now, 55));
-            ViewBag.Tasks = tasks;
 
             stories.Add(new Story("story1", "ref1", "antoine", Story.Types.normal, Story.States.pending, 5, tasks));
             stories.Add(new Story("story2", "ref2", "antoine", Story.Types.normal, Story.States.pending, 5, tasks));
-            ViewBag.Stories = stories;
 
         }
 

@@ -7,7 +7,7 @@ namespace Scrasp.Models
 {
     public class User : IdentifiableEntity
     {
-        public string UserName { get; private set; }
+        public string UserName { get; set; }
         private string password;
         private string role;
 
