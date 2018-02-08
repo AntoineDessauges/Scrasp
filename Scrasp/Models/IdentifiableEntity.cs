@@ -8,12 +8,19 @@ namespace Scrasp.Models
     public class IdentifiableEntity
     {
         private static int lastID;
-        public int Id { get; set; }
+        private int _id;
+        public int Id {
+            get => _id;
+            set{
+                _id = value;
+                lastID = _id;
+            }
+        }
 
         public IdentifiableEntity()
         {
             lastID++;
-            Id = lastID;
+            _id = lastID;
         }
 
     }
