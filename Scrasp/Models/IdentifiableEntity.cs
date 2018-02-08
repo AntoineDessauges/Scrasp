@@ -7,8 +7,14 @@ namespace Scrasp.Models
 {
     public class IdentifiableEntity
     {
-        private int lastID;
-        private int id;
+        private static int lastID;
+        public int id { get; private set; }
+
+        public IdentifiableEntity()
+        {
+            lastID++;
+            id = lastID;
+        }
 
     }
 }
