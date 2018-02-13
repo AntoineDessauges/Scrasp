@@ -34,6 +34,11 @@ namespace Scrasp
                 defaults: new { controller = "Home", action = "ChangeId", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "projects",
+                url: "projects",
+                defaults: new { controller = "Project", action = "index" }
+            );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -5,6 +5,10 @@
     List<string> todolist = ViewBag.Todo;
 }
 
+@section scripts{
+    <script src="@Url.Content("~/Scripts/custom.js")"></script>
+}
+
 @if (ViewBag.Message != null)
 {
     <div class="alert-info">@ViewBag.Message</div>
